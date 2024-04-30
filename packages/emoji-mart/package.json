@@ -1,5 +1,5 @@
 {
-  "name": "emoji-mart",
+  "name": "@mabible/emoji-mart",
   "version": "5.6.0",
   "description": "Emoji picker for the web",
   "license": "MIT",
