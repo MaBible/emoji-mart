@@ -12,8 +12,16 @@ export default class Navigation extends PureComponent {
   constructor() {
     super()
 
+    console.log(Data.categories)
+
+    this.frequentCategory = Data.categories.find(
+      (category) => category.id === 'frequent',
+    )
+
+    console.log(this.frequentCategory)
+
     this.categories = Data.categories.filter((category) => {
-      return !category.target
+      return !category.target && category.id !== 'frequent'
     })
 
     this.state = {
@@ -50,9 +58,30 @@ export default class Navigation extends PureComponent {
     return categoryIcons[style] || categoryIcons
   }
 
-  render() {
-    let selectedCategoryIndex = null
+  renderFrequentIcon = () => {
+    const title =
+      this.frequentCategory.name || I18n.categories[this.frequentCategory.id]
+    const selected =
+      !this.props.unfocused && this.frequentCategory.id == this.state.categoryId
 
+    return (
+      <button
+        aria-label={title}
+        aria-selected={selected || undefined}
+        title={title}
+        type="button"
+        class="flex flex-grow flex-center"
+        onMouseDown={(e) => e.preventDefault()}
+        onClick={() => {
+          this.props.onClick({ category: this.frequentCategory, i: 0 })
+        }}
+      >
+        {this.renderIcon(this.frequentCategory)}
+      </button>
+    )
+  }
+
+  render() {
     return (
       <nav
         id="nav"
@@ -61,14 +90,18 @@ export default class Navigation extends PureComponent {
         dir={this.props.dir}
       >
         <div class="flex relative">
+          {this.props.renderSearchIcon()}
+          {this.renderFrequentIcon()}
+          {this.props.renderSkinToneButton()}
+          <hr
+            style={{
+              margin: '0 5px',
+            }}
+          />
           {this.categories.map((category, i) => {
             const title = category.name || I18n.categories[category.id]
             const selected =
               !this.props.unfocused && category.id == this.state.categoryId
-
-            if (selected) {
-              selectedCategoryIndex = i
-            }
 
             return (
               <button
@@ -79,25 +112,13 @@ export default class Navigation extends PureComponent {
                 class="flex flex-grow flex-center"
                 onMouseDown={(e) => e.preventDefault()}
                 onClick={() => {
-                  this.props.onClick({ category, i })
+                  this.props.onClick({ category, i: i + 1 })
                 }}
               >
                 {this.renderIcon(category)}
               </button>
             )
           })}
-
-          <div
-            class="bar"
-            style={{
-              width: `${100 / this.categories.length}%`,
-              opacity: selectedCategoryIndex == null ? 0 : 1,
-              transform:
-                this.props.dir === 'rtl'
-                  ? `scaleX(-1) translateX(${selectedCategoryIndex * 100}%)`
-                  : `translateX(${selectedCategoryIndex * 100}%)`,
-            }}
-          ></div>
         </div>
       </nav>
     )

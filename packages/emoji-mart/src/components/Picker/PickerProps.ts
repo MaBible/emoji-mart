@@ -74,9 +74,15 @@ export default {
   previewEmoji: {
     value: null,
   },
+  showPreview: {
+    value: false,
+  },
   previewPosition: {
     value: 'bottom',
     choices: ['top', 'bottom', 'none'],
+  },
+  showCategoriesName: {
+    value: true,
   },
   searchPosition: {
     value: 'sticky',

@@ -24,6 +24,7 @@ export default class Picker extends Component {
       pos: [-1, -1],
       perLine: this.initDynamicPerLine(props),
       visibleRows: { 0: true },
+      showSearch: false,
       ...this.getInitialState(props),
     }
   }
@@ -672,6 +673,23 @@ export default class Picker extends Component {
     Store.set('skin', skin)
   }
 
+  renderSearchIcon() {
+    return (
+      <button
+        aria-label="Rechercher"
+        title="Rechercher"
+        type="button"
+        class="flex flex-grow flex-center"
+        onMouseDown={(e) => e.preventDefault()}
+        onClick={() => {
+          this.setState({ showSearch: true })
+        }}
+      >
+        <span class="icon loupe flex">{Icons.search.loupe}</span>
+      </button>
+    )
+  }
+
   renderNav() {
     return (
       <Navigation
@@ -683,6 +701,8 @@ export default class Picker extends Component {
         unfocused={!!this.state.searchResults}
         position={this.props.navPosition}
         onClick={this.handleCategoryClick}
+        renderSearchIcon={() => this.renderSearchIcon()}
+        renderSkinToneButton={() => this.renderSkinToneButton()}
       />
     )
   }
@@ -740,10 +760,6 @@ export default class Picker extends Component {
             )}
           </div>
         </div>
-
-        {!emoji &&
-          this.props.skinTonePosition == 'preview' &&
-          this.renderSkinToneButton()}
       </div>
     )
   }
@@ -836,8 +852,6 @@ export default class Picker extends Component {
               </button>
             )}
           </div>
-
-          {renderSkinTone && this.renderSkinToneButton()}
         </div>
       </div>
     )
@@ -901,9 +915,11 @@ export default class Picker extends Component {
               class="category"
               ref={root}
             >
-              <div class={`sticky padding-small align-${this.dir[0]}`}>
-                {category.name || I18n.categories[category.id]}
-              </div>
+              {this.props.showCategoriesName && (
+                <div class={`sticky padding-small align-${this.dir[0]}`}>
+                  {category.name || I18n.categories[category.id]}
+                </div>
+              )}
               <div
                 class="relative"
                 style={{
@@ -974,14 +990,7 @@ export default class Picker extends Component {
     }
 
     return (
-      <div
-        class="flex flex-auto flex-center flex-middle"
-        style={{
-          position: 'relative',
-          width: this.props.emojiButtonSize,
-          height: this.props.emojiButtonSize,
-        }}
-      >
+      <div class="flex flex-grow flex-center flex-middle">
         <button
           type="button"
           ref={this.refs.skinToneButton}
@@ -991,11 +1000,18 @@ export default class Picker extends Component {
           title={I18n.skins.choose}
           onClick={this.openSkins}
           style={{
-            width: this.props.emojiSize,
-            height: this.props.emojiSize,
+            width: 18,
+            height: 18,
           }}
         >
-          <span class={`skin-tone skin-tone-${this.state.skin}`}></span>
+          <span
+            class={`skin-tone skin-tone-${this.state.skin}`}
+            style={{
+              fontSize: 18,
+              width: 18,
+              height: 18,
+            }}
+          ></span>
         </button>
       </div>
     )
@@ -1106,9 +1122,11 @@ export default class Picker extends Component {
         data-theme={this.state.theme}
         data-menu={this.state.showSkins ? '' : undefined}
       >
-        {this.props.previewPosition == 'top' && this.renderPreview()}
+        {this.props.previewPosition == 'top' &&
+          this.props.showPreview &&
+          this.renderPreview()}
         {this.props.navPosition == 'top' && this.renderNav()}
-        {this.props.searchPosition == 'sticky' && (
+        {this.props.searchPosition == 'sticky' && this.state.showSearch && (
           <div class="padding-lr">{this.renderSearch()}</div>
         )}
 
@@ -1119,14 +1137,18 @@ export default class Picker extends Component {
               height: '100%',
             }}
           >
-            {this.props.searchPosition == 'static' && this.renderSearch()}
+            {this.props.searchPosition == 'static' &&
+              this.state.showSearch &&
+              this.renderSearch()}
             {this.renderSearchResults()}
             {this.renderCategories()}
           </div>
         </div>
 
         {this.props.navPosition == 'bottom' && this.renderNav()}
-        {this.props.previewPosition == 'bottom' && this.renderPreview()}
+        {this.props.previewPosition == 'bottom' &&
+          this.props.showPreview &&
+          this.renderPreview()}
         {this.state.showSkins && this.renderSkins()}
         {this.renderLiveRegion()}
       </section>

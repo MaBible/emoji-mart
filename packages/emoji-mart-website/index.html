@@ -301,35 +301,6 @@
         searchPosition: localStorage.searchPosition,
         skinTonePosition: localStorage.skinTonePosition,
         onEmojiSelect: console.log,
-        custom: [
-          {
-            emojis: [
-              {
-                id: 'octocat',
-                name: 'Octocat',
-                keywords: ['github'],
-                skins: [{ src: document.querySelector('#img-octocat').src }],
-              },
-              {
-                id: 'shipit',
-                name: 'Squirrel',
-                keywords: ['github'],
-                skins: [{ src: document.querySelector('#img-shipit').src }],
-              },
-              {
-                id: 'party_parrot',
-                name: 'Party Parrot',
-                keywords: ['dance', 'dancing'],
-                skins: [{ src: document.querySelector('#img-parrot').src }],
-              },
-            ].concat(custom),
-          },
-        ],
-        onAddCustomEmoji: dialog.hidden
-          ? undefined
-          : () => {
-              dialog.showModal()
-            },
       })
     </script>
   </block>
