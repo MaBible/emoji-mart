@@ -308,7 +308,7 @@ button {
 #nav.fixed-nav {
   position: fixed;
   left: 0;
-  bottom: 0;
+  bottom: var(--em-nav-bottom, 0);
   width: 100%;
 }
 
