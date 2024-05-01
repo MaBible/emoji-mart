@@ -1,6 +1,6 @@
 // @ts-nocheck
 import React, { useEffect, useRef } from 'react'
-import { Picker } from 'emoji-mart'
+import { Picker } from '@mabible/emoji-mart'
 
 export default function EmojiPicker(props) {
   const ref = useRef(null)
@@ -18,5 +18,5 @@ export default function EmojiPicker(props) {
     }
   }, [])
 
-  return React.createElement('div', { ref })
+  return React.createElement(React.Fragment, { ref })
 }
