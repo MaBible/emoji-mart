@@ -50,6 +50,7 @@
     --duration-instant: 0;
   }
 
+  position: relative;
   width: 100%;
   text-align: left;
   border-radius: var(--border-radius);
@@ -272,7 +273,7 @@ button {
   position: relative;
   padding-top: 12px; padding-bottom: 12px;
   padding-right: var(--sidebar-width);
-  background: var(--em-rgb-background);
+  background: var(--em-rgb-background, #202124);
 
   button {
     color: var(--color-b);
@@ -306,7 +307,7 @@ button {
 }
 
 #nav.fixed-nav {
-  position: fixed;
+  position: absolute;
   left: 0;
   bottom: var(--em-nav-bottom, 0);
   width: 100%;
