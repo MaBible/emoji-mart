@@ -82,6 +82,7 @@
 .flex { display: flex }
 .flex-auto { flex: 0 0 auto }
 .flex-center { justify-content: center; }
+.flex-between { justify-content: space-between; }
 .flex-column { flex-direction: column }
 .flex-grow { flex: 1 1 auto }
 .flex-middle { align-items: center }
@@ -130,8 +131,6 @@ a {
 
   &:hover { text-decoration: underline }
 }
-
-.spacer { height: 10px }
 
 [dir="rtl"] .scroll {
   padding-left: 0;
@@ -276,10 +275,16 @@ button {
   background: var(--em-rgb-background, #202124);
 
   button {
-    color: var(--color-b);
-    transition: color var(--duration) var(--easing);
+    border-radius: 100%;
+    overflow: hidden;
+    padding: 8px;
+    color: var(--em-nav-button-color, --color-b);
+    transition: all var(--duration) var(--easing);
 
-    &:hover { color: var(--color-a) }
+    &:hover { 
+      color: var(--em-nav-button-color-hover, --color-a); 
+      background: var(--em-nav-button-bg-color-hover);
+    }
   }
 
   svg, img {
@@ -301,8 +306,17 @@ button {
     transition: transform var(--duration) var(--easing);
   }
 
+  .category-separator {
+    height: 24px;
+    margin: 0 5px;
+    border: none;
+    width: 1px;
+    background: var(--em-category-separator-color)
+  }
+
   button[aria-selected] {
-    color: rgb(var(--em-rgb-accent));
+    color: var(--em-nav-button-color-active, rgb(var(--em-rgb-accent)));
+    background: var(--em-nav-button-bg-color-selected);
   }
 }
 

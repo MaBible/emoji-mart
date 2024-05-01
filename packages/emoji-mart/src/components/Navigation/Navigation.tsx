@@ -70,7 +70,7 @@ export default class Navigation extends PureComponent {
         aria-selected={selected || undefined}
         title={title}
         type="button"
-        class="flex flex-grow flex-center"
+        class="flex flex-center"
         onMouseDown={(e) => e.preventDefault()}
         onClick={() => {
           this.props.onClick({ category: this.frequentCategory, i: 0 })
@@ -89,15 +89,11 @@ export default class Navigation extends PureComponent {
         data-position={this.props.position}
         dir={this.props.dir}
       >
-        <div class="flex relative">
+        <div class="flex flex-middle flex-between relative">
           {this.props.renderSearchIcon()}
           {this.renderFrequentIcon()}
           {this.props.renderSkinToneButton()}
-          <hr
-            style={{
-              margin: '0 5px',
-            }}
-          />
+          <hr className="category-separator" />
           {this.categories.map((category, i) => {
             const title = category.name || I18n.categories[category.id]
             const selected =
@@ -109,7 +105,7 @@ export default class Navigation extends PureComponent {
                 aria-selected={selected || undefined}
                 title={title}
                 type="button"
-                class="flex flex-grow flex-center"
+                class="flex flex-center"
                 onMouseDown={(e) => e.preventDefault()}
                 onClick={() => {
                   this.props.onClick({ category, i: i + 1 })

@@ -679,7 +679,7 @@ export default class Picker extends Component {
         aria-label="Rechercher"
         title="Rechercher"
         type="button"
-        class="flex flex-grow flex-center"
+        class="flex flex-center"
         onMouseDown={(e) => e.preventDefault()}
         onClick={() => {
           this.setState({ showSearch: true })
@@ -821,13 +821,8 @@ export default class Picker extends Component {
   }
 
   renderSearch() {
-    const renderSkinTone =
-      this.props.previewPosition == 'none' ||
-      this.props.skinTonePosition == 'search'
-
     return (
       <div>
-        <div class="spacer"></div>
         <div class="flex flex-middle">
           <div class="search relative flex-grow">
             <input
@@ -991,30 +986,25 @@ export default class Picker extends Component {
     }
 
     return (
-      <div class="flex flex-grow flex-center flex-middle">
-        <button
-          type="button"
-          ref={this.refs.skinToneButton}
-          class="skin-tone-button flex flex-auto flex-center flex-middle"
-          aria-selected={this.state.showSkins ? '' : undefined}
-          aria-label={I18n.skins.choose}
-          title={I18n.skins.choose}
-          onClick={this.openSkins}
+      <button
+        type="button"
+        ref={this.refs.skinToneButton}
+        class="skin-tone-button flex flex-auto flex-center flex-middle"
+        aria-selected={this.state.showSkins ? '' : undefined}
+        aria-label={I18n.skins.choose}
+        title={I18n.skins.choose}
+        onClick={this.openSkins}
+        style={{ width: 34, height: 34 }}
+      >
+        <span
+          class={`skin-tone skin-tone-${this.state.skin}`}
           style={{
+            fontSize: 18,
             width: 18,
             height: 18,
           }}
-        >
-          <span
-            class={`skin-tone skin-tone-${this.state.skin}`}
-            style={{
-              fontSize: 18,
-              width: 18,
-              height: 18,
-            }}
-          ></span>
-        </button>
-      </div>
+        ></span>
+      </button>
     )
   }
 
@@ -1035,12 +1025,6 @@ export default class Picker extends Component {
     const baseRect = this.base.getBoundingClientRect()
 
     const position = {}
-
-    if (this.dir == 'ltr') {
-      position.right = baseRect.right - skinToneButtonRect.right - 3
-    } else {
-      position.left = skinToneButtonRect.left - baseRect.left - 3
-    }
 
     if (
       this.props.previewPosition == 'bottom' &&
@@ -1131,7 +1115,11 @@ export default class Picker extends Component {
           <div class="padding-lr">{this.renderSearch()}</div>
         )}
 
-        <div ref={this.refs.scroll} class="scroll flex-grow padding-lr">
+        <div
+          ref={this.refs.scroll}
+          class="scroll flex-grow padding-lr"
+          style={{ marginBottom: '42px' }}
+        >
           <div
             style={{
               width: this.props.dynamicWidth ? '100%' : lineWidth,
