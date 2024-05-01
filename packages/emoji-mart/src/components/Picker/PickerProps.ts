@@ -62,6 +62,9 @@ export default {
     value: 'top',
     choices: ['top', 'bottom', 'none'],
   },
+  fixedNav: {
+    value: false,
+  },
   noCountryFlags: {
     value: false,
   },

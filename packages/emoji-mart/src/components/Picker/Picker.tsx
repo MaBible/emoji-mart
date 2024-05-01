@@ -703,6 +703,7 @@ export default class Picker extends Component {
         onClick={this.handleCategoryClick}
         renderSearchIcon={() => this.renderSearchIcon()}
         renderSkinToneButton={() => this.renderSkinToneButton()}
+        fixedNav={this.props.fixedNav}
       />
     )
   }

@@ -50,7 +50,6 @@
     --duration-instant: 0;
   }
 
-  position: relative;
   width: 100%;
   text-align: left;
   border-radius: var(--border-radius);
@@ -273,6 +272,7 @@ button {
   position: relative;
   padding-top: 12px; padding-bottom: 12px;
   padding-right: var(--sidebar-width);
+  background: var(--em-rgb-background);
 
   button {
     color: var(--color-b);
@@ -303,6 +303,13 @@ button {
   button[aria-selected] {
     color: rgb(var(--em-rgb-accent));
   }
+}
+
+#nav.fixed-nav {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
 }
 
 #preview {

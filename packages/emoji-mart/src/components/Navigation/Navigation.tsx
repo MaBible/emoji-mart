@@ -85,7 +85,7 @@ export default class Navigation extends PureComponent {
     return (
       <nav
         id="nav"
-        class="padding"
+        class={`padding ${this.props.fixedNav ? 'fixed-nav' : ''}`}
         data-position={this.props.position}
         dir={this.props.dir}
       >
