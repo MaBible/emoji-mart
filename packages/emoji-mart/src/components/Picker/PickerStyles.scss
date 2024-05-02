@@ -277,7 +277,7 @@ button {
   button {
     border-radius: 100%;
     overflow: hidden;
-    padding: 6px;
+    padding: var(--category-icon-padding);
     color: var(--em-nav-button-color, --color-b);
     transition: all var(--duration) var(--easing);
 
