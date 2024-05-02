@@ -1107,11 +1107,7 @@ export default class Picker extends Component {
           <div class="padding-lr">{this.renderSearch()}</div>
         )}
 
-        <div
-          ref={this.refs.scroll}
-          class="scroll flex-grow padding-lr"
-          style={{ marginBottom: '42px' }}
-        >
+        <div ref={this.refs.scroll} class="scroll flex-grow padding-lr">
           <div
             style={{
               width: this.props.dynamicWidth ? '100%' : lineWidth,
