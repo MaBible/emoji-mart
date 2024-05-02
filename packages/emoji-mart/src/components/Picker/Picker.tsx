@@ -994,7 +994,6 @@ export default class Picker extends Component {
         aria-label={I18n.skins.choose}
         title={I18n.skins.choose}
         onClick={this.openSkins}
-        style={{ width: 34, height: 34 }}
       >
         <span
           class={`skin-tone skin-tone-${this.state.skin}`}

@@ -277,7 +277,7 @@ button {
   button {
     border-radius: 100%;
     overflow: hidden;
-    padding: 8px;
+    padding: 6px;
     color: var(--em-nav-button-color, --color-b);
     transition: all var(--duration) var(--easing);
 
@@ -421,8 +421,7 @@ button {
   white-space: nowrap;
   padding: 4px;
   border: 1px solid var(--em-color-border);
-  background-color: rgba(var(--em-rgb-background), .9);
-  backdrop-filter: blur(4px);
+  background-color: var(--em-skintone-menu-background, --color-a);
   border-radius: 10px;
   box-shadow: 1px 1px 5px rgba(0,0,0, .05);
   transition-property: opacity, transform;
