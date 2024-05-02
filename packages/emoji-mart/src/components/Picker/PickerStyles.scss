@@ -16,7 +16,6 @@
 [data-theme="light"] {
   --em-rgb-color: var(--rgb-color, 34, 36, 39);
   --em-rgb-accent: var(--rgb-accent, 34, 102, 237);
-  --em-rgb-input: var(--rgb-input, 255, 255, 255);
   --em-color-border: var(--color-border, rgba(0, 0, 0, .05));
   --em-color-border-over: var(--color-border-over, rgba(0, 0, 0, .1));
 }
@@ -24,7 +23,6 @@
 [data-theme="dark"] {
   --em-rgb-color: var(--rgb-color, 222, 222, 221);
   --em-rgb-accent: var(--rgb-accent, 58, 130, 247);
-  --em-rgb-input: var(--rgb-input, 0, 0, 0);
   --em-color-border: var(--color-border, rgba(255, 255, 255, .1));
   --em-color-border-over: var(--color-border-over, rgba(255, 255, 255, .2));
 }
@@ -211,7 +209,7 @@ a {
     width: 100%;
     padding: 10px 2em 10px 2.2em;
     border-radius: 10px;
-    background-color: var(--em-color-border);
+    background: var(--em-input-background);
     transition-duration: var(--duration);
     transition-property: background-color, box-shadow;
     transition-timing-function: var(--easing);
@@ -230,9 +228,7 @@ a {
     }
 
     &:focus {
-      background-color: rgb(var(--em-rgb-input));
-      box-shadow: inset 0 0 0 1px rgb(var(--em-rgb-accent)),
-                  0 1px 3px rgba(65,69,73,.2);
+      box-shadow: var(--em-input-box-shadow);
     }
   }
 
