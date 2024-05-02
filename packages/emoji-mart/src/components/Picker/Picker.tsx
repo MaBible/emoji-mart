@@ -995,14 +995,7 @@ export default class Picker extends Component {
         title={I18n.skins.choose}
         onClick={this.openSkins}
       >
-        <span
-          class={`skin-tone skin-tone-${this.state.skin}`}
-          style={{
-            fontSize: 18,
-            width: 18,
-            height: 18,
-          }}
-        ></span>
+        <span class={`skin-tone skin-tone-${this.state.skin}`}></span>
       </button>
     )
   }
@@ -1100,7 +1093,7 @@ export default class Picker extends Component {
         style={{
           width: this.props.dynamicWidth
             ? '100%'
-            : `calc(${lineWidth}px + (var(--padding) + var(--sidebar-width)))`,
+            : `calc(${lineWidth}px + (var(--padding)))`,
         }}
         data-emoji-set={this.props.set}
         data-theme={this.state.theme}
