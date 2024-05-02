@@ -1104,7 +1104,7 @@ export default class Picker extends Component {
           this.renderPreview()}
         {this.props.navPosition == 'top' && this.renderNav()}
         {this.props.searchPosition == 'sticky' && this.state.showSearch && (
-          <div class="padding-lr">{this.renderSearch()}</div>
+          <div class="padding-lr padding-small-t">{this.renderSearch()}</div>
         )}
 
         <div ref={this.refs.scroll} class="scroll flex-grow padding-lr">
