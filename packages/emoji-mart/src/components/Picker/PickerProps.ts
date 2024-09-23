@@ -127,4 +127,6 @@ export default {
     deprecated: true,
     value: true,
   },
+
+  displaySearch: false,
 }

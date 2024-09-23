@@ -75,6 +75,12 @@ export default class Picker extends Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.displaySearch !== this.props.displaySearch) {
+      this.setState({ showSearch: Boolean(this.props.displaySearch) })
+    }
+  }
+
   componentWillReceiveProps(nextProps) {
     this.nextState || (this.nextState = {})
 
