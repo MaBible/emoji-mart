@@ -31,7 +31,6 @@ export default class Navigation extends PureComponent {
 
   renderIcon(category) {
     const { icon } = category
-
     if (icon) {
       if (icon.svg) {
         return (
@@ -54,7 +53,6 @@ export default class Navigation extends PureComponent {
       this.props.icons == 'auto'
         ? THEME_ICONS[this.props.theme]
         : this.props.icons
-
     return categoryIcons[style] || categoryIcons
   }
 
@@ -85,15 +83,15 @@ export default class Navigation extends PureComponent {
     return (
       <nav
         id="nav"
-        class={`padding ${this.props.fixedNav ? 'fixed-nav' : ''}`}
+        class={`${this.props.fixedNav ? 'fixed-nav' : ''}`}
         data-position={this.props.position}
         dir={this.props.dir}
+        style={this.props?.style}
       >
         <div class="flex flex-middle flex-between relative">
-          {this.props.renderSearchIcon()}
-          {this.renderFrequentIcon()}
           {this.props.renderSkinToneButton()}
           <hr className="category-separator" />
+          {this.renderFrequentIcon()}
           {this.categories.map((category, i) => {
             const title = category.name || I18n.categories[category.id]
             const selected =
