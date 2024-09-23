@@ -704,6 +704,7 @@ export default class Picker extends Component {
         renderSearchIcon={() => this.renderSearchIcon()}
         renderSkinToneButton={() => this.renderSkinToneButton()}
         fixedNav={this.props.fixedNav}
+        style={this.props?.dynamicPropsSettings?.nav}
       />
     )
   }
@@ -910,10 +911,36 @@ export default class Picker extends Component {
               data-id={category.target ? category.target.id : category.id}
               class="category"
               ref={root}
+              style={{
+                paddingBottom:
+                  this.props?.dynamicPropsSettings?.categories?.gap || '16px',
+              }}
             >
               {this.props.showCategoriesName && (
-                <div class={`sticky padding-small align-${this.dir[0]}`}>
-                  {category.name || I18n.categories[category.id]}
+                <div
+                  class={`align-${this.dir[0]}`}
+                  style={{
+                    marginBottom: this.props.emojiGap || '8px',
+                  }}
+                >
+                  <div
+                    style={{
+                      width: 'auto',
+                      borderRadius: '30px',
+                      ...this.props?.dynamicPropsSettings?.categories,
+                    }}
+                  >
+                    <span
+                      style={{
+                        height: '100%',
+                        display: 'flex',
+                        alignItems: 'center',
+                        fontWeight: '700',
+                      }}
+                    >
+                      {category.name || I18n.categories[category.id]}
+                    </span>
+                  </div>
                 </div>
               )}
               <div
@@ -946,7 +973,12 @@ export default class Picker extends Component {
                       data-index={row.index}
                       ref={ref}
                       class="flex row"
-                      style={{ top: i * this.props.emojiButtonSize }}
+                      style={{
+                        top: i * this.props.emojiButtonSize,
+                        justifyContent: 'flex-start',
+                        gap: this.props.emojiGap || '8px',
+                        marginBottom: this.props.emojiGap || '8px',
+                      }}
                     >
                       {visible &&
                         emojiIds.map((emojiId, ii) => {
@@ -1107,11 +1139,16 @@ export default class Picker extends Component {
           <div class="padding-lr padding-small-t">{this.renderSearch()}</div>
         )}
 
-        <div ref={this.refs.scroll} class="scroll flex-grow padding-lr">
+        <div
+          ref={this.refs.scroll}
+          class="scroll flex-grow padding-lr"
+          style={{ ...this.props?.dynamicPropsSettings?.nav }}
+        >
           <div
             style={{
               width: this.props.dynamicWidth ? '100%' : lineWidth,
               height: '100%',
+              ...this.props?.dynamicPropsSettings?.container,
             }}
           >
             {this.props.searchPosition == 'static' &&
