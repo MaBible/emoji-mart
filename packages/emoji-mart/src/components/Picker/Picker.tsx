@@ -25,6 +25,7 @@ export default class Picker extends Component {
       perLine: this.initDynamicPerLine(props),
       visibleRows: { 0: true },
       showSearch: false,
+      lockedDisplaySearch: false,
       ...this.getInitialState(props),
     }
   }
@@ -64,8 +65,6 @@ export default class Picker extends Component {
 
   componentDidMount() {
     this.register()
-    console.log('on mount', this.props)
-
     this.shadowRoot = this.base.parentNode
 
     if (this.props.autoFocus) {
@@ -76,11 +75,10 @@ export default class Picker extends Component {
     }
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.displaySearch !== this.props.displaySearch) {
-      console.log('previous props', prevProps)
-      console.log('new props', this.props)
-      this.setState({ showSearch: Boolean(this.props.displaySearch) })
+  componentDidUpdate() {
+    if (this.state.lockedDisplaySearch !== this.props?.displaySearch) {
+      this.setState({ showSearch: Boolean(this.props?.displaySearch) })
+      this.setState({ lockedDisplaySearch: Boolean(this.props?.displaySearch) })
     }
   }
 
@@ -262,6 +260,9 @@ export default class Picker extends Component {
     const { element, emojiButtonSize } = props
 
     const calculatePerLine = () => {
+      if (this.props?.perLine?.value) {
+        return this.props?.perLine?.value
+      }
       const { width } = element.getBoundingClientRect()
       return Math.floor(width / emojiButtonSize)
     }
@@ -283,8 +284,8 @@ export default class Picker extends Component {
     return calculatePerLine()
   }
 
-  getPerLine() {
-    return this.state.perLine || this.props.perLine
+  getPerLine(perLine: number) {
+    return perLine || this.state.perLine || 9
   }
 
   getEmojiByPos([p1, p2]) {
@@ -753,6 +754,7 @@ export default class Picker extends Component {
               skin={this.state.tempSkin || this.state.skin}
               spritesheet={true}
               getSpritesheetURL={this.props.getSpritesheetURL}
+              gap={this.props.emojiGap}
             />
           </div>
 
@@ -824,6 +826,7 @@ export default class Picker extends Component {
             skin={skin}
             spritesheet={true}
             getSpritesheetURL={this.props.getSpritesheetURL}
+            gap={this.props.emojiGap}
           />
         </button>
       </PureInlineComponent>
@@ -902,7 +905,7 @@ export default class Picker extends Component {
   renderCategories() {
     const { categories } = Data
     const hidden = !!this.state.searchResults
-    const perLine = this.getPerLine()
+    const perLine = this.getPerLine(this.props?.perLine)
 
     return (
       <div
@@ -930,6 +933,7 @@ export default class Picker extends Component {
                   class={`align-${this.dir[0]}`}
                   style={{
                     marginBottom: this.props.emojiGap || '8px',
+                    display: 'inline-block',
                   }}
                 >
                   <div

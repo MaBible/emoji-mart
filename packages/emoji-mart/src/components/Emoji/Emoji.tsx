@@ -2,7 +2,7 @@ import { Data } from '../../config'
 import { SearchIndex } from '../../helpers'
 
 export default function Emoji(props) {
-  let { id, skin, emoji } = props
+  let { id, skin, emoji, gap } = props
 
   if (props.shortcodes) {
     const matches = props.shortcodes.match(SearchIndex.SHORTCODES_REGEX)
@@ -42,6 +42,7 @@ export default function Emoji(props) {
             maxWidth: props.size || '1em',
             maxHeight: props.size || '1em',
             display: 'inline-block',
+            marginRight: gap || '8px',
           }}
           alt={emojiSkin.native || emojiSkin.shortcodes}
           src={imageSrc}
@@ -49,6 +50,7 @@ export default function Emoji(props) {
       ) : props.set == 'native' ? (
         <span
           style={{
+            marginRight: gap || '8px',
             fontSize: props.size,
             fontFamily:
               '"EmojiMart", "Segoe UI Emoji", "Segoe UI Symbol", "Segoe UI", "Apple Color Emoji", "Twemoji Mozilla", "Noto Color Emoji", "Android Emoji"',
@@ -69,6 +71,7 @@ export default function Emoji(props) {
             backgroundPosition: `${
               (100 / (Data.sheet.cols - 1)) * emojiSkin.x
             }% ${(100 / (Data.sheet.rows - 1)) * emojiSkin.y}%`,
+            marginRight: gap || '8px',
           }}
         ></span>
       )}

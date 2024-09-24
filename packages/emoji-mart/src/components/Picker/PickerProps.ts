@@ -71,9 +71,7 @@ export default {
   noResultsEmoji: {
     value: null,
   },
-  perLine: {
-    value: 9,
-  },
+  perLine: 9,
   previewEmoji: {
     value: null,
   },
@@ -128,7 +126,9 @@ export default {
     value: true,
   },
 
-  displaySearch: false,
+  displaySearch: {
+    value: false,
+  },
   dynamicPropsSettings: {
     nav: {
       paddingTop: '8px',
