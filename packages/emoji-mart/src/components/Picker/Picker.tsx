@@ -64,6 +64,7 @@ export default class Picker extends Component {
 
   componentDidMount() {
     this.register()
+    console.log('on mount', this.props)
 
     this.shadowRoot = this.base.parentNode
 
@@ -77,6 +78,8 @@ export default class Picker extends Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.displaySearch !== this.props.displaySearch) {
+      console.log('previous props', prevProps)
+      console.log('new props', this.props)
       this.setState({ showSearch: Boolean(this.props.displaySearch) })
     }
   }
