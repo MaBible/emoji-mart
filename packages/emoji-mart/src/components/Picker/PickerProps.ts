@@ -129,4 +129,23 @@ export default {
   },
 
   displaySearch: false,
+  dynamicPropsSettings: {
+    nav: {
+      paddingTop: '8px',
+      paddingBottom: '8px',
+      paddingLeft: '20px',
+      paddingRight: '20px',
+    },
+    container: {
+      paddingTop: '12px',
+      paddingBottom: '12px',
+    },
+    categories: {
+      height: '26px',
+      gap: '16px',
+      paddingLeft: '8px',
+      paddingRight: '8px',
+      fontSize: '12px',
+    },
+  },
 }
